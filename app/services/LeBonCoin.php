@@ -71,7 +71,7 @@ class Service_LeBonCoin
                             switch ($aDate[1]) {
                                 case'jan': $aDate[1] = 'janv.'; break;
                                 case'fév': $aDate[1] = 'févr.'; break;
-                                case'dec': $aDate[1] = 'déc.'; break;
+                                case'déc': $aDate[1] = 'déc.'; break;
                                 case'juillet': $aDate[1] = 'juil.'; break;
                                 case'mars':
                                 case'mai':
