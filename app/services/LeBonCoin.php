@@ -34,7 +34,7 @@ class Service_LeBonCoin
         $date = new Zend_Date();
 
         $dom = new Zend_Dom_Query($response);
-        $results = $dom->query(".list-ads .ad-lbc");
+        $results = $dom->query(".list-ads .lbc");
         if (count($results) == 0) {
             return array();
         }
