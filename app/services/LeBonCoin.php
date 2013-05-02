@@ -34,7 +34,7 @@ class Service_LeBonCoin
         $date = new Zend_Date();
 
         $dom = new Zend_Dom_Query($response);
-        $results = $dom->query(".list-ads .lbc");
+        $results = $dom->query(".list-lbc a");
         if (count($results) == 0) {
             return array();
         }
@@ -42,20 +42,10 @@ class Service_LeBonCoin
         foreach ($results AS $result) {
             $ad = new Model_LeBonCoin_Ad();
             $ad->setProfessionnal(false)->setUrgent(false);
-            $parent = $result->parentNode;
-            if ($parent->tagName == "a") {
-                $a = $parent;
-            } else {
-                $aTags = $result->getElementsByTagName("a");
-                if (!$aTags->length) {
-                    continue;
-                }
-                $a = $aTags->item(0);
-            }
-            if (!preg_match('/([0-9]+)\.htm.*/', $a->getAttribute("href"), $m)) {
+            if (!preg_match('/([0-9]+)\.htm.*/', $result->getAttribute("href"), $m)) {
                 continue;
             }
-            $ad->setLink($a->getAttribute("href"))
+            $ad->setLink($result->getAttribute("href"))
                 ->setId($m[1]);
             foreach ($result->getElementsByTagName("div") AS $node) {
                 if ($node->hasAttribute("class")) {
