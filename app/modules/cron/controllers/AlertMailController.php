@@ -110,7 +110,9 @@ class Cron_AlertMailController extends Zend_Controller_Action
                     $mailAlert->send();
                 }
             } catch (Zend_Db_Table_Row_Exception $e) {
-                
+                Zend_Registry::get('logger')->log(get_class($e) . ' when updating alert mail row of id ' . $alert->id . ': ' . $e->getMessage(), Zend_Log::CRIT);
+            } catch (Zend_Mail_Exception $e) {
+                Zend_Registry::get('logger')->log(get_class($e) . ' when sending alert e-mail "' . $subject . '" to "' . $alert->email . '": ' . $e->getMessage(), Zend_Log::CRIT);
             }
             unset($mail, $mailAlert);
         }
