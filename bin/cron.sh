@@ -18,5 +18,5 @@ if [ -e "$pathRoot/file.lock" ]; then
 fi
 
 touch "$pathRoot/file.lock"
-curl "$host/cron/alert-mail/send?key=$key"
+curl --silent --show-error "$host/cron/alert-mail/send?key=$key"
 rm "$pathRoot/file.lock"
